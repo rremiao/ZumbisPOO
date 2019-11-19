@@ -31,7 +31,7 @@ public class Nomade extends Personagem{
 
     @override
     public void cura(int cura){
-        infectado = false;
+        super.infectado = false;
         this.hp = this.hp + cura;
     }
 
