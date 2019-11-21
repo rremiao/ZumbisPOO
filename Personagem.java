@@ -1,6 +1,5 @@
 public abstract class Personagem {
     private String imagem; // Identificador da imagem
-    private int energia;
     private boolean infectado;
     private Celula celula;
 
@@ -11,37 +10,16 @@ public abstract class Personagem {
         this.infectado = false;
     }
 
-    public int getEnergia(){
-        return energia;
-    }
-
-    public void incrementaEnergia(int valor){
-        if (valor < 0) throw new IllegalArgumentException("Valor de energia invalido");
-        energia += valor;
-    }
-
-    public void diminuiEnergia(int valor){
-        if (valor < 0) throw new IllegalArgumentException("Valor de energia invalido");
-        energia -= valor;
-        if (energia < 0){
-            energia = 0;
-        }
-    }
-
     public boolean infectado(){
         return infectado;
     }
 
-    public void infecta(){
-        infectado = true;
-    }
-
-    public void cura(){
+    public void desinfecta(){
         infectado = false;
     }
 
-    public boolean estaVivo(){
-        return getEnergia() > 0;
+    public void infecta(){
+        infectado = true;
     }
 
     public String getImage(){
