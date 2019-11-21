@@ -2,13 +2,16 @@ public class Caipira extends Personagem{
     private int hp;
     private int movimento;
     private int dano;
-    //Garrucha 5 balas
+    private int cura;
+    private int range;
 
     public Caipira(int energiaInicial, String imagemInicial,int linInicial,int colInicial){
         super(energiaInicial, imagemInicial, linInicial, colInicial)
         this.hp = 4;
         this.movimento = 3;
-        this.dano = 0;//Faca
+        this.dano = 5;
+        this.cura = 2;
+        this.range = 5;
     }
 
     public int ataca(){
@@ -19,22 +22,22 @@ public class Caipira extends Personagem{
         this.hp = this.hp - danoRecebido;
     }
 
-    public void equipaArma(int arma){
-        this.dano = arma;
+    public int getHp(){
+        return this.hp;
     }
 
-    public void equipaArmadura(int armadura){
-        this.hp = this.hp + armadura;
+    public int getRange(){
+        return this.range;
+    }
+
+    public void cura(){
+        desinfecta();
+        this.cura -= 1;
+        this.hp += 2;
     }
 
     @override
-    public void cura(int cura){
-        super.infectado = false;
-        this.hp = this.hp + cura;
-    }
-
-    @override
-    public abstract int atualizaPosicao(){
+    public int atualizaPosicao(){
         return movimento;
     }
 
