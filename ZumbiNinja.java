@@ -1,8 +1,8 @@
-public class ZumbiEsperto extends Personagem {
+public class ZumbiNinja extends Zumbi {
     private Personagem alvo;
 
-    public ZumbiEsperto(int linInicial,int colInicial){
-        super(10,"Esperto",linInicial,colInicial);
+    public ZumbiNinja(int linInicial,int colInicial){
+        super(10,"Ninja",linInicial,colInicial);
         alvo = null;
     }
 
@@ -11,7 +11,7 @@ public class ZumbiEsperto extends Personagem {
         for(int l=0;l<Jogo.NLIN;l++){
             for(int c=0;c<Jogo.NCOL;c++){
                 Personagem p = Jogo.getInstance().getCelula(l, c).getPersonagem();
-                if (p != null && p instanceof Bobao && !p.infectado()){
+                if (p != null && p instanceof Personagem && !p.infectado()){
                     alvo = p;
                     System.out.println("Alvo definido: "+alvo.getImage());
                     return p;
