@@ -1,16 +1,16 @@
-public class ZumbiNinja extends Zumbi {
+public class ZumbiT800 extends Zumbi {
     private Personagem alvo;
     private int hp;
     private int movimento;
     private int dano;
 
 
-    public ZumbiNinja(int linInicial,int colInicial){
-        super(10,"Ninja",linInicial,colInicial);
+    public ZumbiT800(int linInicial,int colInicial){
+        super(10,"T800",linInicial,colInicial);
         alvo = null;
-        this.hp = 3;
-        this.movimento = 4;
-        this.dano = 3;
+        this.hp = 6;
+        this.movimento = 2;
+        this.dano = 4;
     }
 
     private Personagem defineAlvo(){

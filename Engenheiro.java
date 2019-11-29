@@ -36,12 +36,6 @@ public class Engenheiro extends Personagem{
         this.hp += 2;
     }
 
-    public void atualiza(int movimento){
-        atualizaPosicao();
-        
-    }
-
-    
     @Override
     public void atualizaPosicao() {
         int dirLin = Jogo.getInstance().aleatorio(movimento)-1;
