@@ -14,13 +14,28 @@ public class Engenheiro extends Personagem{
         this.range = 3;
     }
 
-    public int ataca(){
-        return this.dano;
+    public void ataca(Zumbi alvo){
+        alvo.hp = alvo.hp - this.dano;
     }
 
-    public void recebeAtaque(int danoRecebido){
-        this.hp = this.hp - danoRecebido;
+     public void testaAtaque(List<Personagem> zumbis){
+        List<Personagem> alvo = zumbis 
+                                .stream()
+                                .filter(p-> p instanceof Zumbi)
+                                .filter(p-> p instanceof ZumbiNinja)
+                                .filter(p-> p instanceof ZumbiT800)
+                                .map(p-> p.getCelula())
+                                .collect(Collectors.toList());
+        alvo.forEach(if(alvo.getCelula() < this.getRange())this.ataca());
+
+                                
+                                 
     }
+
+    public void recebeAtaque(Zumbi atacante){
+        this.hp = this.hp - atacante.dano;
+    }
+
 
     public int getHp(){
         return this.hp;
@@ -36,14 +51,9 @@ public class Engenheiro extends Personagem{
         this.hp += 2;
     }
 
-    public void atualiza(int movimento){
-        atualizaPosicao();
-        
-    }
-
-    
     @Override
     public void atualizaPosicao() {
+        testaAtaque();
         int dirLin = Jogo.getInstance().aleatorio(movimento)-1;
         int dirCol = Jogo.getInstance().aleatorio(movimento)-1;
         int oldLin = this.getCelula().getLinha();

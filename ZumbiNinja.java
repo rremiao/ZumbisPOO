@@ -1,9 +1,18 @@
-public class ZumbiEsperto extends Personagem {
+public class ZumbiNinja extends Zumbi {
     private Personagem alvo;
+    private int hp;
+    private int movimento;
+    private int dano;
+    private int range;
 
-    public ZumbiEsperto(int linInicial,int colInicial){
-        super(10,"Esperto",linInicial,colInicial);
+
+    public ZumbiNinja(int linInicial,int colInicial){
+        super(10,"Ninja",linInicial,colInicial);
         alvo = null;
+        this.hp = 3;
+        this.movimento = 4;
+        this.dano = 3;
+        this.range = 1;
     }
 
     private Personagem defineAlvo(){
@@ -11,7 +20,7 @@ public class ZumbiEsperto extends Personagem {
         for(int l=0;l<Jogo.NLIN;l++){
             for(int c=0;c<Jogo.NCOL;c++){
                 Personagem p = Jogo.getInstance().getCelula(l, c).getPersonagem();
-                if (p != null && p instanceof Bobao && !p.infectado()){
+                if (p != null && p instanceof Personagem && !p.infectado()){
                     alvo = p;
                     System.out.println("Alvo definido: "+alvo.getImage());
                     return p;
@@ -59,7 +68,30 @@ public class ZumbiEsperto extends Personagem {
             // Coloca personagem na nova posição
             Jogo.getInstance().getCelula(lin, col).setPersonagem(this);
         }
+        testaAtaque();
     }
+
+    public void testaAtaque(Personagem alvo){
+        Personagem param = alvo
+                           .stream()
+                           .filter(p-> p instanceof Engenheiro || p-> p instanceof Medico || p-> p instanceof Caipira || p-> instanceof Nomade)
+                           .map(p-> p.getCelula())
+                           .collect(Collectors.toList());
+         param.forEach(if(param.getCelula() < this.getRange())this.ataca());
+    }
+
+    public void ataca(Personagem alvo){
+        alvo.hp = alvo.hp - this.dano;
+    }
+
+     public void recebeAtaque(Personagem param){
+        this.hp = this.hp - param.dano;
+    }
+
+     public int getHp(){
+        return this.hp;
+    }
+
 
     @Override
     public void influenciaVizinhos() {
