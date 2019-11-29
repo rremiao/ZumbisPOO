@@ -70,9 +70,13 @@ public class Jogo extends Application {
         aux = new Image("file:Imagens\\img6.jpg");
         imagens.put("Morto", aux);
         aux = new Image("file:Imagens\\img7.jpg");
-        imagens.put("Esperto", aux);
+        imagens.put("Ninja", aux);
         aux = new Image("file:Imagens\\back.jpg");
         imagens.put("Vazio", aux);
+        aux = new Image("placeholder p Hamester");
+        imagens.put("T800", aux);
+        aux = new Iamge("placeholder p Hamester");
+        imagens.put("Underground", aux);
 
         // Armazena a imagem da celula ula
         imagens.put("Null", null);
@@ -108,10 +112,14 @@ public class Jogo extends Application {
 
         // Cria a lista de personagens
         personagens = new ArrayList<>(NLIN*NCOL);
-  
-        personagens.add(new ZumbiEsperto(6,6));
-        //personagens.add(new Bobao(0,0));
-        //personagens.add(new Bobao(4,0));
+        personagens.add(new ZumbiNinja(6,6));
+        personagens.add(new Medico(3,2));
+        personagens.add(new Bobao(4,0));
+        personagens.add(new Engenheiro(5,6));
+        personagens.add(new Nomade(4,4));
+        personagens.add(new Caipira(2,5));
+        personagens.add(new ZumbiNinja(1,1));
+        personagens.add(new ZumbiT800(5,5));
         
         
         // Cria 10 boboes aleatorios
@@ -144,7 +152,7 @@ public class Jogo extends Application {
         }
 
         // Define o botao que avança a simulação
-        Button avanca = new Button("NextStep");
+        Button avanca = new Button("Próximo turno");
         avanca.setOnAction(e->avancaSimulacao());
         // Define outros botoes
         
@@ -171,18 +179,22 @@ public class Jogo extends Application {
         long vivos = personagens
                     .stream()
                     .filter(p->!(p instanceof Zumbi))
-                    .filter(p->!(p instanceof ZumbiEsperto))
+                    .filter(p->!(p instanceof ZumbiNinja))
+                    .filter(p->!(p instanceof ZumbiT800))
+                    .filter(p->!(p instanceof ZumbiUnderground))
                     .filter(p->p.estaVivo())
                     .count();
         if (vivos == 0){
             Alert msgBox = new Alert(AlertType.INFORMATION);
             msgBox.setHeaderText("Fim de Jogo");
-            msgBox.setContentText("Todos os boboes morreram!");
+            msgBox.setContentText("Todos os personagens morreram!");
             msgBox.showAndWait();
             System.exit(0);
         }
     }
 
+
+    /*
     public void cliqueNaCelula(ActionEvent e){
         Celula c = (Celula)e.getSource();
         System.out.println("Celula: l="+c.getLinha()+" c="+c.getColuna());
@@ -191,4 +203,5 @@ public class Jogo extends Application {
             p.cura();
         }
     }
+    */
 }

@@ -14,13 +14,25 @@ public class Caipira extends Personagem{
         this.range = 5;
     }
 
-    public int ataca(){
-        return this.dano;
+    public void ataca(Zumbi alvo){
+        alvo.hp = alvo.hp - this.dano;
     }
 
-    public void recebeAtaque(int danoRecebido){
-        this.hp = this.hp - danoRecebido;
+     public void testaAtaque(List<Personagem> zumbis){
+        List<Personagem> alvo = zumbis 
+                                .stream()
+                                .filter(p-> p instanceof Zumbi)
+                                .filter(p-> p instanceof ZumbiNinja)
+                                .filter(p-> p instanceof ZumbiT800)
+                                .map(p-> p.getCelula())
+                                .collect(Collectors.toList());
+        alvo.forEach(if(alvo.getCelula() < this.getRange())this.ataca());                           
     }
+
+    public void recebeAtaque(Zumbi atacante){
+        this.hp = this.hp - atacante.dano;
+    }
+
 
     public int getHp(){
         return this.hp;
@@ -36,9 +48,26 @@ public class Caipira extends Personagem{
         this.hp += 2;
     }
 
-    @override
-    public int atualizaPosicao(){
-        return movimento;
+    @Override
+    public void atualizaPosicao() {
+        testaAtaque();
+        int dirLin = Jogo.getInstance().aleatorio(movimento)-1;
+        int dirCol = Jogo.getInstance().aleatorio(movimento)-1;
+        int oldLin = this.getCelula().getLinha();
+        int oldCol = this.getCelula().getColuna();
+        int lin = oldLin + dirLin;
+        int col = oldCol + dirCol;
+        if (lin < 0) lin = 0;
+        if (lin >= Jogo.NLIN) lin = Jogo.NLIN-1;
+        if (col < 0) col = 0;
+        if (col >= Jogo.NCOL) col = Jogo.NCOL-1;
+        if (Jogo.getInstance().getCelula(lin, col).getPersonagem() != null){
+            return;
+        }else{
+            // Limpa celula atual
+            Jogo.getInstance().getCelula(oldLin, oldCol).setPersonagem(null);
+            // Coloca personagem na nova posição
+            Jogo.getInstance().getCelula(lin, col).setPersonagem(this);
+        }
     }
-
 }

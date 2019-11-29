@@ -3,6 +3,7 @@ public class ZumbiT800 extends Zumbi {
     private int hp;
     private int movimento;
     private int dano;
+    private int range;
 
 
     public ZumbiT800(int linInicial,int colInicial){
@@ -11,6 +12,7 @@ public class ZumbiT800 extends Zumbi {
         this.hp = 6;
         this.movimento = 2;
         this.dano = 4;
+        this.range = 1;
     }
 
     private Personagem defineAlvo(){
@@ -66,14 +68,24 @@ public class ZumbiT800 extends Zumbi {
             // Coloca personagem na nova posição
             Jogo.getInstance().getCelula(lin, col).setPersonagem(this);
         }
+        testaAtaque();
     }
 
-    public int ataca(){
-        return this.dano;
+   public void testaAtaque(Personagem alvo){
+        Personagem param = alvo
+                           .stream()
+                           .filter(p-> p instanceof Engenheiro || p-> p instanceof Medico || p-> p instanceof Caipira || p-> instanceof Nomade)
+                           .map(p-> p.getCelula())
+                           .collect(Collectors.toList());
+         param.forEach(if(param.getCelula() < this.getRange())this.ataca());
     }
 
-     public void recebeAtaque(int danoRecebido){
-        this.hp = this.hp - danoRecebido;
+    public void ataca(Personagem alvo){
+        alvo.hp = alvo.hp - this.dano;
+    }
+
+     public void recebeAtaque(Personagem param){
+        this.hp = this.hp - param.dano;
     }
 
      public int getHp(){
