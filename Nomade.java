@@ -1,12 +1,12 @@
-public class Nomade extends Personagem{
+public abstract class Nomade extends Personagem{
     public int hp;
     public int movimento;
     public int dano;
     public int cura;
     public int range;
 
-    public Nomade(int energiaInicial, String imagemInicial,int linInicial,int colInicial){
-        super(energiaInicial, imagemInicial, linInicial, colInicial);
+    public Nomade( String imagemInicial,int linInicial,int colInicial){
+        super imagemInicial, linInicial, colInicial);
         this.hp = 5;
         this.movimento = 5;
         this.dano = 4;

@@ -1,4 +1,4 @@
-public class ZumbiNinja extends Zumbi {
+public abstract class ZumbiNinja extends Zumbi {
     public int hp;
     public int movimento;
     public Personagem alvo;

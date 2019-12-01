@@ -1,4 +1,4 @@
-public class ZumbiT800 extends Zumbi {
+public abstract class ZumbiT800 extends Zumbi {
     public int hp;
     public Personagem alvo;
     public int movimento;
@@ -75,10 +75,10 @@ public class ZumbiT800 extends Zumbi {
     public void testaAtaque(List<Personagem> param){
         List<Personagem> alvo = param
                                 .stream()
-                                .filter(p-> p instanceof Medico || p instanceof Caipira || p instanceof Engenheiro ||  p instanceof Nomade)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0)
-                                .map(this.ataca(p))
-                                .collect(Collectors.toList());  
+                                .filter(p-> p instanceof Medico || p instanceof Caipira || p instanceof Engenheiro || p instanceof Nomade)
+                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
+        alvo.forEach(p->this.ataca(p));
+
     }
 
     public void ataca(Personagem alvo){

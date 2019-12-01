@@ -1,12 +1,12 @@
-public class Medico extends Personagem{
+public abstract class Medico extends Personagem{
     public int hp;
     public int movimento;
     public int dano;
     public int cura;
     public int range;
 
-    public Medico(int energiaInicial, String imagemInicial,int linInicial,int colInicial){
-        super(energiaInicial, imagemInicial, linInicial, colInicial);
+    public Medico( String imagemInicial,int linInicial,int colInicial){
+        super(imagemInicial, linInicial, colInicial);
         this.hp = 4;
         this.movimento = 4;
         this.dano = 3;

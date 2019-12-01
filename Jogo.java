@@ -118,14 +118,14 @@ public class Jogo extends Application {
 
         // Cria a lista de personagens
         personagens = new ArrayList<>(NLIN*NCOL);
-        personagens.add(new ZumbiNinja(6,6));
-        personagens.add(new Medico(3,2));
-        personagens.add(new Bobao(4,0));
-        personagens.add(new Engenheiro(5,6));
-        personagens.add(new Nomade(4,4));
-        personagens.add(new Caipira(2,5));
-        personagens.add(new ZumbiNinja(1,1));
-        personagens.add(new ZumbiT800(5,5));
+        personagens.add(new ZumbiNinja("ZumbiNinja",6,6));
+        personagens.add(new Medico("Medico",3,2));
+        //personagens.add(new Bobao(4,0));
+        personagens.add(new Engenheiro("Engenheiro",5,6));
+        personagens.add(new Nomade("Nomade",4,4));
+        personagens.add(new Caipira("Capiria",2,5));
+        personagens.add(new ZumbiT800("ZumbiT800",1,1));
+        personagens.add(new ZumbiUnderground("ZumbiUnderground",5,5));
         
         
         // Cria 10 boboes aleatorios
@@ -138,7 +138,7 @@ public class Jogo extends Application {
                 int lin = random.nextInt(NLIN);
                 int col = random.nextInt(NCOL);
                 if (this.getCelula(lin, col).getPersonagem() == null){
-                    personagens.add(new Bobao(lin,col));
+                    personagens.add(new Bobao("Bobao",lin,col));
                     posOk = true;
                 }
             }
@@ -151,7 +151,7 @@ public class Jogo extends Application {
                 int lin = random.nextInt(NLIN);
                 int col = random.nextInt(NCOL);
                 if (this.getCelula(lin, col).getPersonagem() == null){
-                    personagens.add(new Zumbi(lin,col));
+                    personagens.add(new Zumbi("Zumbi",lin,col));
                     posOk = true;
                 }
             }
@@ -188,7 +188,6 @@ public class Jogo extends Application {
                     .filter(p->!(p instanceof ZumbiNinja))
                     .filter(p->!(p instanceof ZumbiT800))
                     .filter(p->!(p instanceof ZumbiUnderground))
-                    .filter(p->p.estaVivo())
                     .count();
         if (vivos == 0){
             Alert msgBox = new Alert(AlertType.INFORMATION);
@@ -199,15 +198,13 @@ public class Jogo extends Application {
         }
     }
 
-
-    /*
     public void cliqueNaCelula(ActionEvent e){
         Celula c = (Celula)e.getSource();
         System.out.println("Celula: l="+c.getLinha()+" c="+c.getColuna());
         Personagem p = c.getPersonagem();
         if (p.infectado()){
-            p.cura();
+            p.desinfecta();
         }
     }
-    */
+    
 }

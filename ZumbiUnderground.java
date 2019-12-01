@@ -1,4 +1,4 @@
-public class ZumbiUnderground extends Zumbi {
+public abstract class ZumbiUnderground extends Zumbi {
     public int hp;
     public int movimento;
     public Personagem alvo;

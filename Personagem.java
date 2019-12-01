@@ -1,4 +1,9 @@
 public abstract class Personagem {
+    public int hp;
+    public int movimento;
+    public int dano;
+    public int cura;
+    public int range;
     private String imagem; // Identificador da imagem
     private boolean infectado;
     private Celula celula;
