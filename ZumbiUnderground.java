@@ -19,9 +19,9 @@ public class ZumbiUnderground extends Zumbi {
     //Apaguei os metodos restantes pois esse zumbi apenas ataca, mas nao se move ou recebe ataques;
     public void testaAtaque(List<Personagem> zumbis){
         if(p-> p instanceof Personagem : zumbis){
-            if(this.getCelula() <= p.getCelula()){
-            this.ataca();
-        }    
+            if((this.getCelula() <= p.getCelula()) <= this.range){
+            this.ataca(p);
+        }   
                        
     }
 

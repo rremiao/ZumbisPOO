@@ -73,8 +73,8 @@ public class ZumbiNinja extends Zumbi {
 
     public void testaAtaque(List<Personagem> zumbis){
         if(p-> p instanceof Personagem : zumbis){
-            if(this.getCelula() <= p.getCelula()){
-            this.ataca();
+            if((this.getCelula() <= p.getCelula()) <= this.range){
+            this.ataca(p);
         }    
                        
     }
