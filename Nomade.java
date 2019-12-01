@@ -19,12 +19,11 @@ public class Nomade extends Personagem{
     }
 
     public void testaAtaque(List<Personagem> zumbis){
-        List<Personagem> alvo = zumbis 
-                                .stream()
-                                .filter(p-> p instanceof Zumbi || p-> p instanceof ZumbiNinja || p-> p instanceof ZumbiT800)
-                                .filter(p-> p.getCelula() <= this.getRange())
-                                .map(this.ataca())
-                                .collect(Collectors.toList());                         
+        if(p-> p instanceof Zumbi : zumbis){
+            if(this.getCelula() <= p.getCelula()){
+            this.ataca();
+        }    
+                       
     }
 
     public void recebeAtaque(Zumbi atacante){
