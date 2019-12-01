@@ -22,9 +22,9 @@ public class ZumbiUnderground extends Zumbi {
         List<Personagem> alvo = param
                                 .stream()
                                 .filter(p-> p instanceof Medico || p instanceof Caipira || p instanceof Engenheiro || p instanceof Nomade)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0)
-                                .map(this.ataca(p))
-                                .collect(Collectors.toList());  
+                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
+        alvo.forEach(p->this.ataca(p));
+
     }
 
     public void ataca(Personagem alvo){
