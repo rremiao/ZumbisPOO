@@ -71,12 +71,13 @@ public class ZumbiT800 extends Zumbi {
         testaAtaque();
     }
 
-    public void testaAtaque(List<Personagem> zumbis){
-        if(p-> p instanceof Personagem : zumbis){
-            if((this.getCelula() <= p.getCelula()) <= this.range){
-            this.ataca(p);
-        }     
-                       
+    public void testaAtaque(List<Personagem> param){
+        List<Personagem> alvo = param
+                                .stream()
+                                .filter(p-> p instanceof Medico || p-> p instanceof Caipira || p-> p instanceof Engenheiro || p-> p instanceof Nomade)
+                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0)
+                                .map(this.ataca(p))
+                                .collect(Collectors.toList());  
     }
 
     public void ataca(Personagem alvo){

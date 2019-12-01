@@ -19,11 +19,12 @@ public class Engenheiro extends Personagem{
     }
 
     public void testaAtaque(List<Personagem> zumbis){
-        if(p-> p instanceof Zumbi : zumbis){
-            if((this.getCelula() <= p.getCelula())<= this.range){
-            this.ataca(p);
-        }     
-                       
+        List<Personagem> alvo = zumbis 
+                                .stream()
+                                .filter(p-> p instanceof Zumbi || p-> p instanceof ZumbiNinja || p-> p instanceof ZumbiT800)
+                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0)
+                                .map(this.ataca(p))
+                                .collect(Collectors.toList());  
     }
 
     public void recebeAtaque(Zumbi atacante){
