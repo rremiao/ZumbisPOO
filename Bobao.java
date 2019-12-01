@@ -1,4 +1,4 @@
-public class Bobao extends Personagem {
+public abstract class Bobao extends Personagem {
     public Bobao(int linInicial, int colInicial) {
         super("Normal", linInicial, colInicial);
     }
