@@ -68,7 +68,7 @@ public class ZumbiT800 extends Zumbi {
             // Coloca personagem na nova posição
             Jogo.getInstance().getCelula(lin, col).setPersonagem(this);
         }
-        testaAtaque();
+        testaAtaque(Jogo.getInstance().getPersonagem());
     }
 
     public void testaAtaque(List<Personagem> param){

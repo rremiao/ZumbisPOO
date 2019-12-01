@@ -57,7 +57,7 @@ public class Medico extends Personagem{
     @Override
     public void atualizaPosicao() {
         getHp();
-        testaAtaque();
+        testaAtaque(Jogo.getInstance().getPersonagem());
         int dirLin = Jogo.getInstance().aleatorio(movimento)-1;
         int dirCol = Jogo.getInstance().aleatorio(movimento)-1;
         int oldLin = this.getCelula().getLinha();

@@ -37,7 +37,7 @@ public class ZumbiUnderground extends Zumbi {
     }
     @Override
     public void atualizaPosicao() {
-        testaAtaque();
+        testaAtaque(Jogo.getInstance().getPersonagem());
     
     }
 }
