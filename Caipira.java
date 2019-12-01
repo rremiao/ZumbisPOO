@@ -1,11 +1,11 @@
-public class abstract Caipira extends Personagem{
+public abstract class Caipira extends Personagem{
     private int hp;
     private int movimento;
     private int dano;
     private int cura;
     private int range;
 
-    public Caipira(int energiaInicial, String imagemInicial,int linInicial,int colInicial){
+    public Caipira(String imagemInicial, int linInicial, int colInicial){
         super(energiaInicial, imagemInicial, linInicial, colInicial);
         this.hp = 4;
         this.movimento = 3;
