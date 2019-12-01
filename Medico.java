@@ -1,9 +1,9 @@
 public class Medico extends Personagem{
-    private int hp;
-    private int movimento;
-    private int dano;
-    private int cura;
-    private int range;
+    public int hp;
+    public int movimento;
+    public int dano;
+    public int cura;
+    public int range;
 
     public Medico(int energiaInicial, String imagemInicial,int linInicial,int colInicial){
         super(energiaInicial, imagemInicial, linInicial, colInicial);
@@ -26,7 +26,7 @@ public class Medico extends Personagem{
      public void testaAtaque(List<Personagem> zumbis){
         List<Personagem> alvo = zumbis 
                                 .stream()
-                                .filter(p-> p instanceof Zumbi || p-> p instanceof ZumbiNinja || p-> p instanceof ZumbiT800)
+                                .filter(p-> p instanceof Zumbi || p instanceof ZumbiNinja ||  p instanceof ZumbiT800)
                                 .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
         alvo.forEach(p->this.ataca(p));
                                 

@@ -1,13 +1,13 @@
 public class ZumbiNinja extends Zumbi {
-    private Personagem alvo;
-    private int hp;
-    private int movimento;
-    private int dano;
-    private int range;
+    public int hp;
+    public int movimento;
+    public int dano;
+    public int cura;
+    public int range;
 
 
     public ZumbiNinja(int linInicial,int colInicial){
-        super(10,"Ninja",linInicial,colInicial);
+        super("Ninja",linInicial,colInicial);
         alvo = null;
         this.hp = 3;
         this.movimento = 4;

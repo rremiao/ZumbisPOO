@@ -1,8 +1,10 @@
 public class Zumbi extends Personagem {
-    private int hp;
-    private int range;
-    private int movimento;
-    private int dano;
+    public int hp;
+    public int movimento;
+    public int dano;
+    public int cura;
+    public int range;
+
     public Zumbi(int linInicial,int colInicial){
         super(10,"Zumbi",linInicial,colInicial);
     }
