@@ -1,12 +1,13 @@
 public class ZumbiNinja extends Zumbi {
     public int hp;
     public int movimento;
+    public Personagem alvo;
     public int dano;
     public int cura;
     public int range;
 
 
-    public ZumbiNinja(int linInicial,int colInicial){
+    public ZumbiNinja(String imagemInicial, int linInicial,int colInicial){
         super("Ninja",linInicial,colInicial);
         alvo = null;
         this.hp = 3;

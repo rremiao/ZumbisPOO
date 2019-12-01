@@ -1,12 +1,13 @@
 public class ZumbiUnderground extends Zumbi {
     public int hp;
     public int movimento;
+    public Personagem alvo;
     public int dano;
     public int cura;
     public int range;
 
 
-    public ZumbiUnderground(int linInicial,int colInicial){
+    public ZumbiUnderground(String imagemInicial, int linInicial,int colInicial){
         super("Underground",linInicial,colInicial);
         alvo = null;
         this.hp = 1;

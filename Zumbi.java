@@ -5,8 +5,8 @@ public class Zumbi extends Personagem {
     public int cura;
     public int range;
 
-    public Zumbi(int linInicial,int colInicial){
-        super(10,"Zumbi",linInicial,colInicial);
+    public Zumbi(String imagemInicial, int linInicial,int colInicial){
+        super("Zumbi",linInicial,colInicial);
     }
 
     @Override

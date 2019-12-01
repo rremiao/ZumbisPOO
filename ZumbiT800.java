@@ -1,12 +1,13 @@
 public class ZumbiT800 extends Zumbi {
     public int hp;
+    public Personagem alvo;
     public int movimento;
     public int dano;
     public int cura;
     public int range;
 
 
-    public ZumbiT800(int linInicial,int colInicial){
+    public ZumbiT800(String imagemInicial, int linInicial,int colInicial){
         super("T800",linInicial,colInicial);
         alvo = null;
         this.hp = 6;
