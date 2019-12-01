@@ -3,7 +3,7 @@
 Trabalho Final da Cadeira de POO
 
 
-- Polimorfismo zumbis
-- Polimorfismo sobreviventes
-- Novos parametros
-- Classe classes
+- Polimorfismo zumbis //Done
+- Polimorfismo sobreviventes //Done
+- Novos parametros //Needs Fix
+- Classe classes //Killed
