@@ -61,21 +61,27 @@ public class Jogo extends Application {
         imagens = new HashMap<>();
 
         // Armazena as imagens dos personagens
-        Image aux = new Image("file:Imagens\\img1.jpg");
-        imagens.put("Normal", aux);
-        aux = new Image("file:Imagens\\img2.jpg");
+        Image aux = new Image("file:Imagens\\nomade.jpg");
+        imagens.put("Nomade", aux);
+        aux = new Image("file:Imagens\\engenheiro.jpg");
+        imagens.put("Engenheiro", aux);
+        aux = new Image("file:Imagens\\medico.jpg");
+        imagens.put("Medico", aux);
+        aux = new Image("file:Imagens\\caipira.jpg");
+        imagens.put("Caipira", aux);
+        aux = new Image("file:Imagens\\infectado.png");
         imagens.put("Infectado", aux);
-        aux = new Image("file:Imagens\\img8.jpg");
+        aux = new Image("file:Imagens\\homerzombie.png");
         imagens.put("Zumbi", aux);
-        aux = new Image("file:Imagens\\img6.jpg");
+        aux = new Image("file:Imagens\\morto.jpg");
         imagens.put("Morto", aux);
-        aux = new Image("file:Imagens\\img7.jpg");
+        aux = new Image("file:Imagens\\ninjazombie.png");
         imagens.put("Ninja", aux);
         aux = new Image("file:Imagens\\back.jpg");
         imagens.put("Vazio", aux);
-        aux = new Image("placeholder p Hamester");
+        aux = new Image("file:Imagens\\t800zombie.png");
         imagens.put("T800", aux);
-        aux = new Iamge("placeholder p Hamester");
+        aux = new Iamge("file:Imagens\\undergroundzombie.png");
         imagens.put("Underground", aux);
 
         // Armazena a imagem da celula ula
