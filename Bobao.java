@@ -13,9 +13,7 @@ public class Bobao extends Personagem {
         this.getCelula().setImageFromPersonagem();   
     }
 
-    @Override
     public void cura(){
-        super.cura();
         this.setImage("Normal");
         this.getCelula().setImageFromPersonagem();   
     }
@@ -30,20 +28,4 @@ public class Bobao extends Personagem {
         // Não influencia ninguém
     }
 
-    @Override
-    public void verificaEstado() {
-        // Se esta morto retorna
-        if (!this.estaVivo()){
-            return;
-        }
-        // Se esta infectado perde energia a cada passo
-        if (this.infectado()) {
-            diminuiEnergia(2);
-            // Se não tem mais energia morre
-            if (this.getEnergia() == 0) {
-                this.setImage("Morto");
-                this.getCelula().setImageFromPersonagem();
-            }
-        }
-    }
 }

@@ -3,9 +3,8 @@ public abstract class Personagem {
     private boolean infectado;
     private Celula celula;
 
-    public Personagem(int energiaInicial, String imagemInicial,int linInicial,int colInicial){
+    public Personagem( String imagemInicial,int linInicial,int colInicial){
         this.imagem = imagemInicial;
-        this.energia = energiaInicial;
         Jogo.getInstance().getCelula(linInicial, colInicial).setPersonagem(this);
         this.infectado = false;
     }

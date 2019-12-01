@@ -74,7 +74,7 @@ public class ZumbiT800 extends Zumbi {
     public void testaAtaque(List<Personagem> param){
         List<Personagem> alvo = param
                                 .stream()
-                                .filter(p-> p instanceof Medico || p-> p instanceof Caipira || p-> p instanceof Engenheiro || p-> p instanceof Nomade)
+                                .filter(p-> p instanceof Medico || p instanceof Caipira || p instanceof Engenheiro ||  p instanceof Nomade)
                                 .filter(p-> (p.getCelula() - this.getCelula()) <= 0)
                                 .map(this.ataca(p))
                                 .collect(Collectors.toList());  

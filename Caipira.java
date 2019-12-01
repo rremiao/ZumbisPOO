@@ -1,4 +1,4 @@
-public class Caipira extends Personagem{
+public class abstract Caipira extends Personagem{
     private int hp;
     private int movimento;
     private int dano;
@@ -22,9 +22,9 @@ public class Caipira extends Personagem{
         List<Personagem> alvo = zumbis 
                                 .stream()
                                 .filter(p-> p instanceof Zumbi || p-> p instanceof ZumbiNinja || p-> p instanceof ZumbiT800)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0)
-                                .map(this.ataca(p))
-                                .collect(Collectors.toList());  
+                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
+        alvo.forEach(p->this.ataca(p));
+                                
     }
 
     public void recebeAtaque(Zumbi atacante){

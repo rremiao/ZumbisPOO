@@ -23,14 +23,15 @@ public class Medico extends Personagem{
     }
 
 
-    public void testaAtaque(List<Personagem> zumbis){
+     public void testaAtaque(List<Personagem> zumbis){
         List<Personagem> alvo = zumbis 
                                 .stream()
                                 .filter(p-> p instanceof Zumbi || p-> p instanceof ZumbiNinja || p-> p instanceof ZumbiT800)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0)
-                                .map(this.ataca(p))
-                                .collect(Collectors.toList());  
+                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
+        alvo.forEach(p->this.ataca(p));
+                                
     }
+
 
     public int getHp(){
         testaCura();
