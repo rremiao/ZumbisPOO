@@ -6,7 +6,7 @@ public abstract class Caipira extends Personagem{
     public int range;
 
     public Caipira(String imagemInicial, int linInicial, int colInicial){
-        super imagemInicial, linInicial, colInicial);
+        super (String imagemInicial, linInicial, colInicial);
         this.hp = 4;
         this.movimento = 3;
         this.dano = 5;
