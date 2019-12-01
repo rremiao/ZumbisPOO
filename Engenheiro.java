@@ -18,18 +18,13 @@ public class Engenheiro extends Personagem{
         alvo.hp = alvo.hp - this.dano;
     }
 
-     public void testaAtaque(List<Personagem> zumbis){
+    public void testaAtaque(List<Personagem> zumbis){
         List<Personagem> alvo = zumbis 
                                 .stream()
-                                .filter(p-> p instanceof Zumbi)
-                                .filter(p-> p instanceof ZumbiNinja)
-                                .filter(p-> p instanceof ZumbiT800)
-                                .map(p-> p.getCelula())
-                                .collect(Collectors.toList());
-        alvo.forEach(if(alvo.getCelula() < this.getRange())this.ataca());
-
-                                
-                                 
+                                .filter(p-> p instanceof Zumbi || p-> p instanceof ZumbiNinja || p-> p instanceof ZumbiT800)
+                                .filter(p-> p.getCelula() <= this.getRange())
+                                .map(this.ataca())
+                                .collect(Collectors.toList());                         
     }
 
     public void recebeAtaque(Zumbi atacante){
