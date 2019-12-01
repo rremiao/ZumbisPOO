@@ -6,7 +6,7 @@ public class Caipira extends Personagem{
     private int range;
 
     public Caipira(int energiaInicial, String imagemInicial,int linInicial,int colInicial){
-        super(energiaInicial, imagemInicial, linInicial, colInicial)
+        super(energiaInicial, imagemInicial, linInicial, colInicial);
         this.hp = 4;
         this.movimento = 3;
         this.dano = 5;
