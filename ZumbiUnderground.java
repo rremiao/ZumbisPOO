@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class ZumbiUnderground extends Zumbi {
     public int hp;
     public int movimento;
@@ -7,7 +10,7 @@ public class ZumbiUnderground extends Zumbi {
     public int range;
 
 
-    public ZumbiUnderground(String imagemInicial, int linInicial,int colInicial){
+    public ZumbiUnderground(int linInicial,int colInicial){
         super("Underground",linInicial,colInicial);
         alvo = null;
         this.hp = 1;
@@ -19,11 +22,11 @@ public class ZumbiUnderground extends Zumbi {
     //Alterei o metodo de atacar pois ele só pode atacar quando suas posições se sobrepoem
     //Apaguei os metodos restantes pois esse zumbi apenas ataca, mas nao se move ou recebe ataques;
     public void testaAtaque(List<Personagem> param){
-        List<Personagem> alvo = param
+        List<Personagem> alvo = (List)param
                                 .stream()
                                 .filter(p-> p instanceof Medico || p instanceof Caipira || p instanceof Engenheiro || p instanceof Nomade)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
-        alvo.forEach(p->this.ataca(p));
+                                .filter(p-> this.verificaRange((Personagem)p));
+        alvo.forEach(p->  p.recebeAtaque(this.dano));
 
     }
 
@@ -33,12 +36,20 @@ public class ZumbiUnderground extends Zumbi {
 
 
     @Override
-    public void verificaEstado() {
+    public boolean verificaEstado() {
+        return true;
         // Como não sofre influencia de ninguém, o estado nunca muda
     }
     @Override
     public void atualizaPosicao() {
-        testaAtaque(Jogo.getInstance().getPersonagem());
+        testaAtaque(Jogo.getInstance().getPersonagens());
     
+    }
+
+    public boolean verificaRange(Personagem alvo){
+        if(alvo.getCelula().getLinha() > this.getCelula().getLinha()-range && alvo.getCelula().getLinha() < this.getCelula().getLinha()+range)
+            if(alvo.getCelula().getColuna() > this.getCelula().getColuna()-range && alvo.getCelula().getColuna() < this.getCelula().getColuna()+range)
+                return true;
+        return false;
     }
 }
