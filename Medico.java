@@ -1,11 +1,14 @@
-public abstract class Medico extends Personagem{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Medico extends Personagem{
     public int hp;
     public int movimento;
     public int dano;
     public int cura;
     public int range;
 
-    public Medico( String imagemInicial,int linInicial,int colInicial){
+    public Medico(String imagemInicial,int linInicial,int colInicial){
         super(imagemInicial, linInicial, colInicial);
         this.hp = 4;
         this.movimento = 4;
@@ -18,17 +21,19 @@ public abstract class Medico extends Personagem{
         alvo.hp = alvo.hp - this.dano;
     }
 
-    public void recebeAtaque(Zumbi atacante){
-        this.hp = this.hp - atacante.dano;
+    
+
+    public void recebeAtaque(int danoP){
+        this.hp = this.hp - danoP;
     }
 
 
-     public void testaAtaque(List<Personagem> zumbis){
-        List<Personagem> alvo = zumbis 
+    public void testaAtaque(List<Personagem> zumbis){
+        List<Personagem> alvo = (List)zumbis 
                                 .stream()
-                                .filter(p-> p instanceof Zumbi || p instanceof ZumbiNinja ||  p instanceof ZumbiT800)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
-        alvo.forEach(p->this.ataca(p));
+                                .filter(p -> p instanceof Zumbi ||  p instanceof ZumbiNinja || p instanceof ZumbiT800)
+                                .filter(p -> this.verificaRange((Zumbi)p));
+        alvo.forEach(p -> p.recebeAtaque(this.dano));
                                 
     }
 
@@ -58,7 +63,7 @@ public abstract class Medico extends Personagem{
     @Override
     public void atualizaPosicao() {
         getHp();
-        testaAtaque(Jogo.getInstance().getPersonagem());
+        testaAtaque(Jogo.getInstance().getPersonagens());
         int dirLin = Jogo.getInstance().aleatorio(movimento)-1;
         int dirCol = Jogo.getInstance().aleatorio(movimento)-1;
         int oldLin = this.getCelula().getLinha();
@@ -77,6 +82,23 @@ public abstract class Medico extends Personagem{
             // Coloca personagem na nova posição
             Jogo.getInstance().getCelula(lin, col).setPersonagem(this);
         }
+    }
+
+    @Override
+    public void influenciaVizinhos() {
+
+    }
+
+    @Override
+    public boolean verificaEstado() {
+        return true;
+    }
+
+    public boolean verificaRange(Personagem alvo){
+        if(alvo.getCelula().getLinha() > this.getCelula().getLinha()-range && alvo.getCelula().getLinha() < this.getCelula().getLinha()+range)
+            if(alvo.getCelula().getColuna() > this.getCelula().getColuna()-range && alvo.getCelula().getColuna() < this.getCelula().getColuna()+range)
+                return true;
+        return false;
     }
 
 }

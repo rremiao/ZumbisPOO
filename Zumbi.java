@@ -5,7 +5,11 @@ public class Zumbi extends Personagem {
     public int cura;
     public int range;
 
-    public Zumbi(String imagemInicial, int linInicial,int colInicial){
+    public Zumbi(String nomeImagem, int linInicial,int colInicial){
+        super(nomeImagem,linInicial,colInicial);
+    }
+
+    public Zumbi(int linInicial,int colInicial){
         super("Zumbi",linInicial,colInicial);
     }
 
@@ -55,7 +59,12 @@ public class Zumbi extends Personagem {
     }
 
     @Override
-    public void verificaEstado() {
+    public boolean verificaEstado() {
+        return true;
         // Como não sofre influencia de ninguém, o estado nunca muda
+    }
+
+    public void recebeAtaque(int danoP){
+        this.hp = this.hp - danoP;
     }
 }

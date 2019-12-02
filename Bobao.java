@@ -1,4 +1,4 @@
-public abstract class Bobao extends Personagem {
+public class Bobao extends Personagem {
     public Bobao(int linInicial, int colInicial) {
         super("Normal", linInicial, colInicial);
     }
@@ -18,6 +18,10 @@ public abstract class Bobao extends Personagem {
         this.getCelula().setImageFromPersonagem();   
     }
 
+    public void recebeAtaque(int danoP){
+        //this.hp = this.hp - danoP;
+    }
+
     @Override
     public void atualizaPosicao() {
         // Não se mexe
@@ -26,6 +30,11 @@ public abstract class Bobao extends Personagem {
     @Override
     public void influenciaVizinhos() {
         // Não influencia ninguém
+    }
+
+    @Override
+    public boolean verificaEstado() {
+        return true;
     }
 
 }

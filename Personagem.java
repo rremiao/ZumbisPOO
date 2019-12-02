@@ -1,12 +1,12 @@
 public abstract class Personagem {
+    private String imagem; // Identificador da imagem
+    private boolean infectado;
+    private Celula celula;
     public int hp;
     public int movimento;
     public int dano;
     public int cura;
     public int range;
-    private String imagem; // Identificador da imagem
-    private boolean infectado;
-    private Celula celula;
 
     public Personagem( String imagemInicial,int linInicial,int colInicial){
         this.imagem = imagemInicial;
@@ -46,7 +46,9 @@ public abstract class Personagem {
     public abstract void atualizaPosicao();
 
     // Verifica possiveis atualizações de estado a cada passo
-    public abstract void verificaEstado();
+    public abstract boolean verificaEstado();
+
+    public abstract void recebeAtaque(int danoP);
 
     // Define como o personagem influencia os vizinhos
     // Toda vez que chega em uma célula analisa os vizinhos

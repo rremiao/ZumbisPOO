@@ -1,4 +1,7 @@
-public abstract class Caipira extends Personagem{
+import java.util.ArrayList;
+import java.util.List;
+
+public class Caipira extends Personagem{
     public int hp;
     public int movimento;
     public int dano;
@@ -19,16 +22,16 @@ public abstract class Caipira extends Personagem{
     }
 
     public void testaAtaque(List<Personagem> zumbis){
-        List<Personagem> alvo = zumbis 
+        List<Personagem> alvo = (List)zumbis 
                                 .stream()
-                                .filter(p-> p instanceof Zumbi ||  p instanceof ZumbiNinja || p instanceof ZumbiT800)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
-        alvo.forEach(p->this.ataca(p));
+                                .filter(p -> p instanceof Zumbi ||  p instanceof ZumbiNinja || p instanceof ZumbiT800)
+                                .filter(p -> this.verificaRange((Zumbi)p));
+        alvo.forEach(p ->  p.recebeAtaque(this.dano));
                                 
     }
 
-    public void recebeAtaque(Zumbi atacante){
-        this.hp = this.hp - atacante.dano;
+    public void recebeAtaque(int danoP){
+        this.hp = this.hp - danoP;
     }
 
 
@@ -48,7 +51,7 @@ public abstract class Caipira extends Personagem{
 
     @Override
     public void atualizaPosicao() {
-        testaAtaque(Jogo.getInstance().getPersonagem());
+        testaAtaque(Jogo.getInstance().getPersonagens());
         int dirLin = Jogo.getInstance().aleatorio(movimento)-1;
         int dirCol = Jogo.getInstance().aleatorio(movimento)-1;
         int oldLin = this.getCelula().getLinha();
@@ -68,4 +71,21 @@ public abstract class Caipira extends Personagem{
             Jogo.getInstance().getCelula(lin, col).setPersonagem(this);
         }
     }
+    @Override
+    public void influenciaVizinhos() {
+
+    }
+
+    @Override
+    public boolean verificaEstado() {
+        return true;
+    }
+
+    public boolean verificaRange(Personagem alvo){
+        if(alvo.getCelula().getLinha() > this.getCelula().getLinha()-range && alvo.getCelula().getLinha() < this.getCelula().getLinha()+range)
+            if(alvo.getCelula().getColuna() > this.getCelula().getColuna()-range && alvo.getCelula().getColuna() < this.getCelula().getColuna()+range)
+                return true;
+        return false;
+    }
+
 }

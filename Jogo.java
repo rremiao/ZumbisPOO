@@ -57,6 +57,10 @@ public class Jogo extends Application {
         return celulas.get(pos);
     }
 
+    public List<Personagem> getPersonagens(){
+        return personagens;
+    }
+
     private void loadImagens() {
         imagens = new HashMap<>();
 
@@ -81,7 +85,7 @@ public class Jogo extends Application {
         imagens.put("Vazio", aux);
         aux = new Image("file:Imagens\\t800zombie.png");
         imagens.put("T800", aux);
-        aux = new Iamge("file:Imagens\\undergroundzombie.png");
+        aux = new Image("file:Imagens\\undergroundzombie.png");
         imagens.put("Underground", aux);
 
         // Armazena a imagem da celula ula
@@ -110,7 +114,7 @@ public class Jogo extends Application {
         for (int lin = 0; lin < NLIN; lin++) {
             for (int col = 0; col < NCOL; col++) {
                 Celula cel = new Celula(lin,col);
-                cel.setOnAction(e->cliqueNaCelula(e));
+                //cel.setOnAction(e->cliqueNaCelula(e));
                 celulas.add(cel);
                 tab.add(cel, col, lin);
             }
@@ -118,14 +122,14 @@ public class Jogo extends Application {
 
         // Cria a lista de personagens
         personagens = new ArrayList<>(NLIN*NCOL);
-        personagens.add(new ZumbiNinja("ZumbiNinja",6,6));
+        personagens.add(new ZumbiNinja(6,6));
         personagens.add(new Medico("Medico",3,2));
-        //personagens.add(new Bobao(4,0));
+        personagens.add(new Bobao(4,0));
         personagens.add(new Engenheiro("Engenheiro",5,6));
         personagens.add(new Nomade("Nomade",4,4));
-        personagens.add(new Caipira("Capiria",2,5));
-        personagens.add(new ZumbiT800("ZumbiT800",1,1));
-        personagens.add(new ZumbiUnderground("ZumbiUnderground",5,5));
+        personagens.add(new Caipira("Caipira",2,5));
+        personagens.add(new ZumbiNinja(1,1));
+        personagens.add(new ZumbiT800(5,5));
         
         
         // Cria 10 boboes aleatorios
@@ -138,7 +142,7 @@ public class Jogo extends Application {
                 int lin = random.nextInt(NLIN);
                 int col = random.nextInt(NCOL);
                 if (this.getCelula(lin, col).getPersonagem() == null){
-                    personagens.add(new Bobao("Bobao",lin,col));
+                    personagens.add(new Bobao(lin,col));
                     posOk = true;
                 }
             }
@@ -151,7 +155,7 @@ public class Jogo extends Application {
                 int lin = random.nextInt(NLIN);
                 int col = random.nextInt(NCOL);
                 if (this.getCelula(lin, col).getPersonagem() == null){
-                    personagens.add(new Zumbi("Zumbi",lin,col));
+                    personagens.add(new Zumbi(lin,col));
                     posOk = true;
                 }
             }
@@ -188,6 +192,7 @@ public class Jogo extends Application {
                     .filter(p->!(p instanceof ZumbiNinja))
                     .filter(p->!(p instanceof ZumbiT800))
                     .filter(p->!(p instanceof ZumbiUnderground))
+                    .filter(p->p.verificaEstado())
                     .count();
         if (vivos == 0){
             Alert msgBox = new Alert(AlertType.INFORMATION);
@@ -198,13 +203,15 @@ public class Jogo extends Application {
         }
     }
 
+
+    /*
     public void cliqueNaCelula(ActionEvent e){
         Celula c = (Celula)e.getSource();
         System.out.println("Celula: l="+c.getLinha()+" c="+c.getColuna());
         Personagem p = c.getPersonagem();
         if (p.infectado()){
-            p.desinfecta();
+            p.cura();
         }
     }
-    
+    */
 }

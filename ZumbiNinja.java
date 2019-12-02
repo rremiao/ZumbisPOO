@@ -1,4 +1,7 @@
-public abstract class ZumbiNinja extends Zumbi {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ZumbiNinja extends Zumbi {
     public int hp;
     public int movimento;
     public Personagem alvo;
@@ -7,7 +10,7 @@ public abstract class ZumbiNinja extends Zumbi {
     public int range;
 
 
-    public ZumbiNinja(String imagemInicial, int linInicial,int colInicial){
+    public ZumbiNinja(int linInicial,int colInicial){
         super("Ninja",linInicial,colInicial);
         alvo = null;
         this.hp = 3;
@@ -69,24 +72,21 @@ public abstract class ZumbiNinja extends Zumbi {
             // Coloca personagem na nova posição
             Jogo.getInstance().getCelula(lin, col).setPersonagem(this);
         }
-        testaAtaque(Jogo.getInstance().getPersonagem());
+        testaAtaque(Jogo.getInstance().getPersonagens());
     }
 
     public void testaAtaque(List<Personagem> param){
-        List<Personagem> alvo = param
+        List<Personagem> alvo = (List)param
                                 .stream()
                                 .filter(p-> p instanceof Medico || p instanceof Caipira || p instanceof Engenheiro || p instanceof Nomade)
-                                .filter(p-> (p.getCelula() - this.getCelula()) <= 0);
-        alvo.forEach(p->this.ataca(p));
+                                .filter(p-> this.verificaRange((Personagem)p));
+        alvo.forEach(p-> p.recebeAtaque(this.dano));
 
     }
 
-    public void ataca(Personagem alvo){
-        alvo.hp = alvo.hp - this.dano;
-    }
 
-     public void recebeAtaque(Personagem param){
-        this.hp = this.hp - param.dano;
+    public void recebeAtaque(int danoP){
+        this.hp = this.hp - danoP;
     }
 
      public int getHp(){
@@ -118,7 +118,15 @@ public abstract class ZumbiNinja extends Zumbi {
     }
 
     @Override
-    public void verificaEstado() {
+    public boolean verificaEstado() {
+        return true;
         // Como não sofre influencia de ninguém, o estado nunca muda
+    }
+
+    public boolean verificaRange(Personagem alvo){
+        if(alvo.getCelula().getLinha() > this.getCelula().getLinha()-range && alvo.getCelula().getLinha() < this.getCelula().getLinha()+range)
+            if(alvo.getCelula().getColuna() > this.getCelula().getColuna()-range && alvo.getCelula().getColuna() < this.getCelula().getColuna()+range)
+                return true;
+        return false;
     }
 }
